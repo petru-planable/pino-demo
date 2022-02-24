@@ -60,16 +60,6 @@ const setAxiosLogInterceptors = (logger) => {
   const logResponseSuccess = (response) => {
     const { config, data } = response;
     const contentType = response.headers["content-type"];
-    // let data = {};
-
-    // // The only acceptable page formats, otherwise there might be a file and the server will go out
-    // // of memory if we attempt to read it.
-    // if (
-    //   contentType?.includes("text/html") ||
-    //   contentType?.includes("application/json")
-    // ) {
-    //   data = response.data;
-    // }
 
     logger.info("[Axios]: response, %o", {
       statusText: response.statusText,
@@ -78,7 +68,9 @@ const setAxiosLogInterceptors = (logger) => {
         url: config.url,
         method: config.method,
       },
-       data,
+
+      // Error on huge payload, like pdf images blob
+      data,
     });
   };
 
@@ -119,14 +111,13 @@ const setAxiosLogInterceptors = (logger) => {
   );
 };
 
+function makeTestRequest() {
+  const logger = getLogger();
+  setAxiosLogInterceptors(logger);
 
-function makeTestRequest(){
-    const logger = getLogger();
-    setAxiosLogInterceptors(logger);
-
-    axios.get('https://file-examples-com.github.io/uploads/2017/10/file-example_PDF_1MB.pdf')
-
+  axios.get(
+    "https://github.com/petru-planable/pino-demo/blob/master/mergePdfFiles.pdf"
+  );
 }
-
 
 makeTestRequest();
