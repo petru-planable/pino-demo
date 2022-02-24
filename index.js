@@ -116,7 +116,7 @@ function makeTestRequest() {
   setAxiosLogInterceptors(logger);
 
   axios.get(
-    "https://github.com/petru-planable/pino-demo/blob/master/mergePdfFiles.pdf"
+    "https://github.com/petru-planable/pino-demo/blob/master/ec2-ug.pdf"
   );
 }
 
