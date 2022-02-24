@@ -59,8 +59,6 @@ const setAxiosLogInterceptors = (logger) => {
    */
   const logResponseSuccess = (response) => {
     const { config, data } = response;
-    const contentType = response.headers["content-type"];
-
     logger.info("[Axios]: response, %o", {
       statusText: response.statusText,
       status: response.status,
@@ -116,7 +114,7 @@ function makeTestRequest() {
   setAxiosLogInterceptors(logger);
 
   axios.get(
-    "https://github.com/petru-planable/pino-demo/blob/master/ec2-ug.pdf"
+    "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-ug.pdf"
   );
 }
 
